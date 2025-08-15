@@ -1,0 +1,87 @@
+---
+title: "loops-functions"
+format: html
+editor: visual
+---
+
+```{r}
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+transects <- c("Transect A", "Transect B", "Transect C")
+
+out_matrix <- matrix(nrow = length(weekdays), ncol = length(transects))
+
+for (i in seq_along(weekdays)) {
+  for (j in seq_along(transects)) {
+    week_tran <- paste(weekdays[i], "-", transects[j])
+    out_matrix[i, j] <- week_tran
+  }
+}
+
+
+```
+
+```{r}
+
+force <- function(m, a) {
+  force <- (m*a)
+  f <- paste("The resulting force is", force ,"Newtons.")
+  return(f)
+}
+
+force(4, 5)
+```
+
+```{r}
+#Task 4
+
+#equation
+wave_power <- function(wave_height, wave_period) {
+  0.5 * (wave_height^2) * wave_period
+}
+
+wave_heights <- seq(from = 0, to = 3, by = 0.2)
+
+wave_power(wave_height = wave_heights, wave_period = 8)
+
+```
+```{r}
+#task 3
+#recreating table
+fish_parms <- data.frame(common_name = c("Milkfish", "Great barracuda", "Giant trevally"),
+                         a_est = c(0.0905, 0.0181, 0.0353),
+                         b_est = c(2.52, 3.27, 3.05))
+
+#equation
+fish_weight <- function(fish_name, tot_length) {
+  fish_subset <- fish_parms |> filter(common_name == fish_name)
+  expt_fish_weight <- a_est*((total_fish_length)^b_est)
+  return(expt_fish_weight)
+}
+
+fish_weight("Milkfish", 57)
+
+#tot_length <- seq(from = 0, to = 100, by = 1)
+
+
+
+```
+
+```{r}
+brenville_waves <- function(wave_height, wave_period, depth) {
+  
+  if (depth > 12) {
+    message("Using the deep wave equation.")
+    bren_wave_energy <- 0.5 * (wave_height ^ 2) * wave_period
+  }
+  
+  else if (depth <= 12) {
+    message("Using the shallow wave equation.")
+    bren_wave_energy <- 0.81 * (wave_height ^ 2) * wave_period
+  }
+  
+  return(bren_wave_energy)
+}
+
+brenville_waves(wave_height = 5, wave_period = 10, depth = 4)
+```
+
